@@ -63,6 +63,7 @@ paths:
           description: paging flag, height of last item in last page
           schema:
             type: integer
+            format: int64
       responses:
         '200':
           description: successfully get lists
@@ -1099,12 +1100,14 @@ components:
       properties:
         height:
           type: integer
+          format: int64
           description: Block height.
         blockHash:
           type: string
           description: Block hash.
         version:
           type: integer
+          format: int64
           description: Block version.
         prevBlockHash:
           type: string
@@ -1132,12 +1135,15 @@ components:
           description: Miner address that received rewards.
         txCount:
           type: integer
+          format: int64
           description: Total txs count included in the block.
         inputCount:
           type: integer
+          format: int64
           description: Total input count in the block.
         outputCount:
           type: integer
+          format: int64
           description: Total output count in the block
         size:
           type: integer
