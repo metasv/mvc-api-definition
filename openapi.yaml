@@ -11,7 +11,9 @@ info:
     name: MetaSV team
 
 servers:
+  - url: 'https://api-mvc-testnet.metasv.com'
   - url: 'https://api-mvc.metasv.com'
+
 tags:
   - name: block
     description: block related apis
