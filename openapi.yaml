@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: MetaSV API Spec
   description: API definition for MetaSV provided apis
-  version: 2.1.7
+  version: 2.2.0
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
@@ -27,8 +27,8 @@ tags:
     description: merchant apis
   - name: xpub
     description: xpub related apis
-  - name: sensible
-    description: sensible contract related apis
+  - name: contract
+    description: contract contract related apis
   - name: user
     description: user account related apis
 
@@ -468,13 +468,13 @@ paths:
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
 
-  '/sensible/ft/address/{address}/utxo':
+  '/contract/ft/address/{address}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible token utxos for specific address.
+        - contract
+      summary: Get all contract token utxos for specific address.
       parameters:
         - name: address
           in: path
@@ -502,24 +502,24 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible ft utxo success.
+          description: Get contract ft utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/SensibleFtUtxo'
+                  $ref: '#/components/schemas/ContractFtUtxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
 
-  '/sensible/ft/address/{address}/balance':
+  '/contract/ft/address/{address}/balance':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible token balances for specific address.
+        - contract
+      summary: Get all contract token balances for specific address.
       parameters:
         - name: address
           in: path
@@ -541,24 +541,24 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible ft balances success.
+          description: Get contract ft balances success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/SensibleFtBalance'
+                  $ref: '#/components/schemas/ContractFtBalance'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
 
-  '/sensible/ft/address/{address}/balance/confirmed':
+  '/contract/ft/address/{address}/balance/confirmed':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible token balances for specific address ignoring all unconfirmed txs.
+        - contract
+      summary: Get all contract token balances for specific address ignoring all unconfirmed txs.
       parameters:
         - name: address
           in: path
@@ -580,7 +580,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible ft balances succes（ingore unconfirmed txs）.
+          description: Get contract ft balances succes（ingore unconfirmed txs）.
           content:
             application/json:
               schema:
@@ -589,13 +589,13 @@ paths:
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
 
-  '/sensible/nft/address/{address}/utxo':
+  '/contract/nft/address/{address}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible nft token utxos for specific address.
+        - contract
+      summary: Get all contract nft token utxos for specific address.
       parameters:
         - name: address
           in: path
@@ -629,22 +629,22 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible nft utxo success.
+          description: Get contract nft utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftUtxo'
+                  $ref: '#/components/schemas/ContractNftUtxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/address/{address}/summary':
+  '/contract/nft/address/{address}/summary':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
+        - contract
       summary: Get nft summary(NFT count group by genesis) for address.
       parameters:
         - name: address
@@ -655,22 +655,22 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible nft utxo success.
+          description: Get contract nft utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftAddressSummary'
+                  $ref: '#/components/schemas/ContractNftAddressSummary'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/address/{address}/count/confirmed':
+  '/contract/nft/address/{address}/count/confirmed':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
+        - contract
       summary: Get confirmed utxo count for specific nft(ignore all unconfirmed txs).
       parameters:
         - name: address
@@ -693,20 +693,20 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible nft utxo success.
+          description: Get contract nft utxo success.
           content:
             application/json:
               schema:
                 type: integer
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/genesis/{codeHash}/{genesis}/utxo':
+  '/contract/nft/genesis/{codeHash}/{genesis}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible nft token utxos by codeHash and genesisId.
+        - contract
+      summary: Get all contract nft token utxos by codeHash and genesisId.
       parameters:
         - name: codeHash
           in: path
@@ -743,22 +743,22 @@ paths:
             format: int64
       responses:
         '200':
-          description: Get sensible nft utxo success.
+          description: Get contract nft utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftUtxo'
+                  $ref: '#/components/schemas/ContractNftUtxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/genesis/{codeHash}/{genesis}/summary':
+  '/contract/nft/genesis/{codeHash}/{genesis}/summary':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
+        - contract
       summary: Get nft summary(count group by address) for specific codeHash and genesisId(result cached for 60s).
       parameters:
         - name: codeHash
@@ -775,24 +775,24 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible nft utxo success(result cached for 60s)..
+          description: Get contract nft utxo success(result cached for 60s)..
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftGenesisSummary'
+                  $ref: '#/components/schemas/ContractNftGenesisSummary'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
 
-  '/sensible/nft/sell/address/{address}/utxo':
+  '/contract/nft/sell/address/{address}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible sell sell utxos for specific address.
+        - contract
+      summary: Get all contract sell sell utxos for specific address.
       parameters:
         - name: address
           in: path
@@ -820,23 +820,23 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible nft sell utxo success.
+          description: Get contract nft sell utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftSellUtxo'
+                  $ref: '#/components/schemas/ContractNftSellUtxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/sell/genesis/{codeHash}/{genesis}/utxo':
+  '/contract/nft/sell/genesis/{codeHash}/{genesis}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible nft token utxos by codeHash and genesisId.
+        - contract
+      summary: Get all contract nft token utxos by codeHash and genesisId.
       parameters:
         - name: codeHash
           in: path
@@ -873,23 +873,23 @@ paths:
             format: int64
       responses:
         '200':
-          description: Get sensible nft sell utxo success.
+          description: Get contract nft sell utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftSellUtxo'
+                  $ref: '#/components/schemas/ContractNftSellUtxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/sellV2/address/{address}/utxo':
+  '/contract/nft/sellV2/address/{address}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible sell sell utxos for specific address.
+        - contract
+      summary: Get all contract sell sell utxos for specific address.
       parameters:
         - name: address
           in: path
@@ -917,23 +917,23 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible nft sell utxo success.
+          description: Get contract nft sell utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftSellV2Utxo'
+                  $ref: '#/components/schemas/ContractNftSellV2Utxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/sellV2/genesis/{codeHash}/{genesis}/utxo':
+  '/contract/nft/sellV2/genesis/{codeHash}/{genesis}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible nft token utxos by codeHash and genesisId.
+        - contract
+      summary: Get all contract nft token utxos by codeHash and genesisId.
       parameters:
         - name: codeHash
           in: path
@@ -970,69 +970,24 @@ paths:
             format: int64
       responses:
         '200':
-          description: Get sensible nft sell utxo success.
+          description: Get contract nft sell utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftSellV2Utxo'
+                  $ref: '#/components/schemas/ContractNftSellV2Utxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
 
-
-#  '/sensible/nft/auction/address/{address}/utxo':
-#    get:
-#      security:
-#        - bearerAuth: [ ]
-#      tags:
-#        - sensible
-#      summary: Get all sensible auction utxos for specific address.
-#      parameters:
-#        - name: address
-#          in: path
-#          description: Sender address.
-#          required: true
-#          schema:
-#            type: string
-#        - name: codeHash
-#          in: query
-#          description: Filter by contract code hash
-#          required: false
-#          schema:
-#            type: string
-#        - name: genesis
-#          in: query
-#          description: Filter by contract genesis
-#          required: false
-#          schema:
-#            type: string
-#        - name: flag
-#          in: query
-#          description: The flag of the last query Item(Paging flag)
-#          required: false
-#          schema:
-#            type: string
-#      responses:
-#        '200':
-#          description: Get sensible nft sell utxo success.
-#          content:
-#            application/json:
-#              schema:
-#                type: array
-#                maxItems: 300
-#                items:
-#                  $ref: '#/components/schemas/SensibleNftAuctionUtxo'
-#        '401':
-#          $ref: '#/components/schemas/UnauthorizedError'
-  '/sensible/nft/auction/codeHash/{codeHash}/nftId/{nftId}/utxo':
+  '/contract/nft/auction/codeHash/{codeHash}/nftId/{nftId}/utxo':
     get:
       security:
         - bearerAuth: [ ]
       tags:
-        - sensible
-      summary: Get all sensible nft token utxos by codeHash and genesisId.
+        - contract
+      summary: Get all contract nft token utxos by codeHash and genesisId.
       parameters:
         - name: codeHash
           in: path
@@ -1048,14 +1003,14 @@ paths:
             type: string
       responses:
         '200':
-          description: Get sensible nft sell utxo success.
+          description: Get contract nft sell utxo success.
           content:
             application/json:
               schema:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/SensibleNftAuctionUtxo'
+                  $ref: '#/components/schemas/ContractNftAuctionUtxo'
         '401':
           $ref: '#/components/schemas/UnauthorizedError'
 
@@ -1620,8 +1575,8 @@ components:
           description: return messages if broadcast failed
           type: string
 
-    SensibleFtUtxo:
-      description: Sensible fungible token Utxo belongs to the specified address
+    ContractFtUtxo:
+      description: Contract fungible token Utxo belongs to the specified address
       type: object
       properties:
         address:
@@ -1672,8 +1627,8 @@ components:
           description: Flag used for paging
           type: string
 
-    SensibleFtBalance:
-      description: Sensible fungible token balance
+    ContractFtBalance:
+      description: Contract fungible token balance
       type: object
       properties:
         codeHash:
@@ -1712,8 +1667,8 @@ components:
           description: Unconfirmed balance of the token(In string format).
           type: string
 
-    SensibleNftUtxo:
-      description: Sensible non fungible token Utxo belongs to the specified address
+    ContractNftUtxo:
+      description: Contract non fungible token Utxo belongs to the specified address
       type: object
       properties:
         address:
@@ -1762,7 +1717,7 @@ components:
           description: Flag used for paging
           type: string
 
-    SensibleNftAddressSummary:
+    ContractNftAddressSummary:
       description: Get nft summary(count group by genesis) for specific address.
       type: object
       properties:
@@ -1789,7 +1744,7 @@ components:
           description: The count of this nft that the address owns.
           type: integer
 
-    SensibleNftGenesisSummary:
+    ContractNftGenesisSummary:
       description: Get summary(count group by address) for specific genesis.
       type: object
       properties:
@@ -1813,8 +1768,8 @@ components:
           description: The count of this nft that the address owns.
           type: integer
 
-    SensibleNftSellUtxo:
-      description: Sensible nft sell Utxo belongs to the specified address
+    ContractNftSellUtxo:
+      description: Contract nft sell Utxo belongs to the specified address
       type: object
       properties:
         address:
@@ -1873,8 +1828,8 @@ components:
           description: Flag used for paging
           type: string
 
-    SensibleNftSellV2Utxo:
-      description: Sensible nft sell v2 Utxo belongs to the specified address
+    ContractNftSellV2Utxo:
+      description: Contract nft sell v2 Utxo belongs to the specified address
       type: object
       properties:
         address:
@@ -1945,8 +1900,8 @@ components:
           description: Flag used for paging
           type: string
 
-    SensibleNftAuctionUtxo:
-      description: Sensible nft auction Utxo belongs to the specified address
+    ContractNftAuctionUtxo:
+      description: Contract nft auction Utxo belongs to the specified address
       type: object
       properties:
         address:
