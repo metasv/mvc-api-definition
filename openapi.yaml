@@ -1092,6 +1092,7 @@ components:
           description: current mempool transaction count.
         mempoolUsage:
           type: integer
+          format: int64
           description: current mempool usage.
         estimatedBlockSize:
           type: integer
