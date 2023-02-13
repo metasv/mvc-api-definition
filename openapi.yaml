@@ -1127,6 +1127,10 @@ components:
           type: integer
           format: int64
           description: Block timestamp.
+        medianTime:
+          type: integer
+          format: int64
+          description: current median time
         reward:
           type: integer
           format: int64
@@ -1184,15 +1188,12 @@ components:
           description: Miner address that received rewards.
         txCount:
           type: integer
-          format: int64
           description: Total txs count included in the block.
         inputCount:
           type: integer
-          format: int64
           description: Total input count in the block.
         outputCount:
           type: integer
-          format: int64
           description: Total output count in the block
         size:
           type: integer
