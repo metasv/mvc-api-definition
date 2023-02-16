@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: MetaSV for MVC API Spec
   description: API definition for MetaSV provided apis
-  version: 3.0.1
+  version: 3.0.2
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
@@ -206,6 +206,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BroadcastResult'
+
+  '/tx/broadcast/batch':
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - tx
+      summary: Broadcast a batch of tx to metasv fullnode. The tx will be processed one by one.
+      description: This api will broadcast to metasv fullnode directly.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TxRaw'
+      responses:
+        '200':
+          description: Broadcast result list, txid returned with the original order
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BroadcastResult'
 
 
   '/address/{address}/balance':
