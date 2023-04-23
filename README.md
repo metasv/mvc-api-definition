@@ -1,14 +1,14 @@
-# MetaSV
+# MvcApi
 
-MetaSV is a BitcoinSV blockchain API service provider.
+MvcApi is a BitcoinSV blockchain API service provider.
 
-This is MetaSV OpenAPI definition repo.
+This is MvcApi OpenAPI definition repo.
 
 ## Api Documentations
 
-See detailed apis documentations here : https://developer.metasv.com/
+See detailed apis documentations here : https://MvcApi.com/
 
-MetaSV api definition follows OpenAPI 3.0 spec.You can checkout the OPENAPI definitions here: https://swagger.io/specification/
+MvcApi api definition follows OpenAPI 3.0 spec.You can checkout the OPENAPI definitions here: https://swagger.io/specification/
 
 ## Postman Openapi Support
 
@@ -16,7 +16,7 @@ MetaSV api definition follows OpenAPI 3.0 spec.You can checkout the OPENAPI defi
 
 You can also use Postman to develop the apis. Postman currently supports OpenAPI 3.0 definitions.
 
-Open Postman -> Click Import -> Choose Link tab -> Enter url: https://developer.metasv.com/openapi.yaml
+Open Postman -> Click Import -> Choose Link tab -> Enter url: https://MvcApi.com/openapi.yaml
 
 Then all related apis will be imported into postman.
 
@@ -32,17 +32,5 @@ https://openapi-generator.tech/docs/generators#client-generators
 
 You can also use the following sdks directly
 
-### Java
-
-https://github.com/metasv/metasv-java-sdk
-
-### Go
-
-https://github.com/metasv/metasv-go-sdk
-
-## Update Logs
-
-### V2.0.1
-* remove unconfirmed chain calculation since BitcoinSV full node will remove mempool chain limit.
 
 
