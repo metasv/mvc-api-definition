@@ -1,6 +1,6 @@
 # MvcApi
 
-MvcApi is a BitcoinSV blockchain API service provider.
+MvcApi is a MicroVisionChain blockchain API service provider.
 
 This is MvcApi OpenAPI definition repo.
 
