@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: MicrovisionChain API Document
   description: API definition for MicrovisionChain provided apis
-  version: 3.0.9
+  version: 3.0.10
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
@@ -332,6 +332,13 @@ paths:
           required: true
           schema:
             type: string
+        - name: limit
+          in: query
+          description: The max items returned in this query(max 100).
+          required: false
+          schema:
+            type: integer
+            format: int64
         - name: flag
           in: query
           description: The last id of the last query(Paging flag)
@@ -707,6 +714,13 @@ paths:
           required: true
           schema:
             type: string
+        - name: limit
+          in: query
+          description: The max items returned in this query(max 100).
+          required: false
+          schema:
+              type: integer
+              format: int64
         - name: flag
           in: query
           description: The last id of the last query(Paging flag)
