@@ -11,8 +11,7 @@ info:
     name: MicrovisionChain team
 
 servers:
-  - url: 'https://testnet.mvcapi.com'
-  - url: 'https://mainnet.mvcapi.com'
+  - url: "https://mainnet.mvcapi.com"
 
 tags:
   - name: block
@@ -35,26 +34,25 @@ tags:
     description: user account related apis
 
 paths:
-
   /block/info:
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - block
       summary: Get current blockchain info from full node.
       responses:
-        '200':
+        "200":
           description: Get blockchain info success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BlockchainInfo'
+                $ref: "#/components/schemas/BlockchainInfo"
 
   /block:
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - block
       summary: Get recent block list by paging. 30 items per page.
@@ -67,7 +65,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: successfully get lists
           content:
             application/json:
@@ -75,12 +73,12 @@ paths:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/BlockHeaderPage'
+                  $ref: "#/components/schemas/BlockHeaderPage"
 
-  '/block/{blockId}':
+  "/block/{blockId}":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - block
       summary: Get block request by height or hash
@@ -93,38 +91,38 @@ paths:
             type: string
 
       responses:
-        '200':
+        "200":
           description: get block info success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BlockHeaderIndex'
-        '404':
+                $ref: "#/components/schemas/BlockHeaderIndex"
+        "404":
           description: block info not found
 
-  '/treasury':
+  "/treasury":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - treasury
       summary: Get current treasury info.
       responses:
-        '200':
+        "200":
           description: Get treasury info success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TreasuryInfo'
-  '/treasury/history':
+                $ref: "#/components/schemas/TreasuryInfo"
+  "/treasury/history":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - treasury
       summary: Get all treasury history.
       responses:
-        '200':
+        "200":
           description: successfully get lists
           content:
             application/json:
@@ -132,13 +130,12 @@ paths:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/TreasuryHistory'
+                  $ref: "#/components/schemas/TreasuryHistory"
 
-
-  '/tx/{txid}':
+  "/tx/{txid}":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - tx
       summary: Get transaction detail by specific txid.
@@ -157,19 +154,19 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Get transaction detail success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TxDetail'
-        '404':
+                $ref: "#/components/schemas/TxDetail"
+        "404":
           description: Transaction not found
 
-  '/tx/{txid}/raw':
+  "/tx/{txid}/raw":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - tx
       summary: Get transaction raw hex by specific txid.
@@ -181,19 +178,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get transaction raw hex success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TxRaw'
-        '404':
+                $ref: "#/components/schemas/TxRaw"
+        "404":
           description: Transaction not found
 
-  '/tx/{txid}/seen':
+  "/tx/{txid}/seen":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - tx
       summary: Whether MvcApi have seen this tx before. This is a fast approach to know if the tx exist or not.
@@ -205,19 +202,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Return true if the transaction is found.
           content:
             application/json:
               schema:
                 type: boolean
-        '404':
+        "404":
           description: Transaction not found.
 
-  '/tx/broadcast':
+  "/tx/broadcast":
     post:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - tx
       summary: Broadcast tx to MvcApi fullnode.
@@ -226,25 +223,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TxRaw'
+              $ref: "#/components/schemas/TxRaw"
       responses:
-        '201':
+        "201":
           description: Broadcast success, txid returned
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BroadcastResult'
-        '403':
+                $ref: "#/components/schemas/BroadcastResult"
+        "403":
           description: Broadcast Failed
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BroadcastResult'
+                $ref: "#/components/schemas/BroadcastResult"
 
-  '/tx/broadcast/batch':
+  "/tx/broadcast/batch":
     post:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - tx
       summary: Broadcast a batch of tx to MvcApi fullnode. This endpoint use rpc sendrawtransactions.
@@ -255,20 +252,19 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/TxRaw'
+                $ref: "#/components/schemas/TxRaw"
       responses:
-        '200':
+        "200":
           description: Broadcast result list, txid returned with the original order
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchBroadcastResult'
+                $ref: "#/components/schemas/BatchBroadcastResult"
 
-
-  '/address/{address}/balance':
+  "/address/{address}/balance":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - address
       summary: Get address balance by specific address.
@@ -280,17 +276,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get address detail success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddressBalance'
+                $ref: "#/components/schemas/AddressBalance"
 
-  '/address/{address}/utxo':
+  "/address/{address}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - address
       summary: Get address utxos by specific address(100 per page).
@@ -308,7 +304,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get address utxos success.
           content:
             application/json:
@@ -316,12 +312,12 @@ paths:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/AddressUtxo'
+                  $ref: "#/components/schemas/AddressUtxo"
 
-  '/address/{address}/tx':
+  "/address/{address}/tx":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - address
       summary: Get address history by specific address(recent 10 days available).
@@ -352,7 +348,7 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Get address transaction history success.
           content:
             application/json:
@@ -360,13 +356,12 @@ paths:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/AddressTx'
+                  $ref: "#/components/schemas/AddressTx"
 
-
-  '/outpoint/{txid}/{index}':
+  "/outpoint/{txid}/{index}":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - outpoint
       summary: Get tx output(outpoint for vin) spent status.
@@ -385,17 +380,17 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Get outpoint success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OutputInfo'
+                $ref: "#/components/schemas/OutputInfo"
 
-  '/vin/{txid}/detail':
+  "/vin/{txid}/detail":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - tx
       summary: Get all output point of vins in the tx with detailed output script.
@@ -408,22 +403,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get vin list success.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OutputInfoDetail'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/OutputInfoDetail"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-
-  '/merchant/utxo':
+  "/merchant/utxo":
     post:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - merchant
       summary: Pick utxos by addresses and amount.
@@ -432,21 +426,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UtxoPickRequest'
+              $ref: "#/components/schemas/UtxoPickRequest"
       responses:
-        '200':
+        "200":
           description: utxo pick success
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AddressUtxo'
+                  $ref: "#/components/schemas/AddressUtxo"
 
-  '/xpubLite/{xpub}/utxo':
+  "/xpubLite/{xpub}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - xpub
       summary: Get xpub utxos by specific xpub(300 per page).
@@ -464,7 +458,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Get xpub utxos success.
           content:
             application/json:
@@ -472,14 +466,14 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/XpubUtxo'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/XpubUtxo"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  '/xpubLite/{xpub}/address/{address}':
+  "/xpubLite/{xpub}/address/{address}":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - xpub
       summary: Get xpub address type and index. Only index under /0/70 /1/30 is valid. Otherwise not found.
@@ -497,21 +491,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get xpub address success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/XpubAddress'
+                $ref: "#/components/schemas/XpubAddress"
 
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
           description: Address not found in the xpub.
-  '/xpubLite/{xpub}/balance':
+  "/xpubLite/{xpub}/balance":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - xpub
       summary: Get xpub balances including confirmed and unconfirmed.
@@ -524,19 +518,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get xpub balance success.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/XpubLiteBalance'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                $ref: "#/components/schemas/XpubLiteBalance"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  '/contract/unique/genesis/{codeHash}/{genesis}/utxo':
+  "/contract/unique/genesis/{codeHash}/{genesis}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get contract unique utxos by codeHash and genesisId.
@@ -554,7 +548,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract unique utxo success.
           content:
             application/json:
@@ -562,15 +556,14 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/ContractUniqueUtxo'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/ContractUniqueUtxo"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-
-  '/contract/ft/address/{address}/utxo':
+  "/contract/ft/address/{address}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract token utxos for specific address.
@@ -600,7 +593,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract ft utxo success.
           content:
             application/json:
@@ -608,14 +601,14 @@ paths:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/ContractFtUtxo'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/ContractFtUtxo"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  '/contract/ft/address/{address}/balance':
+  "/contract/ft/address/{address}/balance":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract token balances for specific address.
@@ -639,7 +632,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract ft balances success.
           content:
             application/json:
@@ -647,14 +640,14 @@ paths:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/ContractFtBalance'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/ContractFtBalance"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  '/contract/ft/address/{address}/balance/confirmed':
+  "/contract/ft/address/{address}/balance/confirmed":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract token balances for specific address ignoring all unconfirmed txs.
@@ -678,20 +671,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract ft balances succes（ingore unconfirmed txs）.
           content:
             application/json:
               schema:
                 type: integer
                 format: int64
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  '/contract/ft/address/{address}/{codeHash}/{genesis}/tx':
+  "/contract/ft/address/{address}/{codeHash}/{genesis}/tx":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract token balances for specific address.
@@ -719,8 +712,8 @@ paths:
           description: The max items returned in this query(max 100).
           required: false
           schema:
-              type: integer
-              format: int64
+            type: integer
+            format: int64
         - name: flag
           in: query
           description: The last id of the last query(Paging flag)
@@ -728,7 +721,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract ft history success.
           content:
             application/json:
@@ -736,14 +729,14 @@ paths:
                 type: array
                 maxItems: 100
                 items:
-                  $ref: '#/components/schemas/ContractFtAddressTx'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/ContractFtAddressTx"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  '/contract/ft/genesis/{codeHash}/{genesis}/circulation':
+  "/contract/ft/genesis/{codeHash}/{genesis}/circulation":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all sum of circulation ft token utxos by codeHash and genesisId(10min cached).
@@ -761,18 +754,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get circulation successful.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContractFtGenesisCirculation'
+                $ref: "#/components/schemas/ContractFtGenesisCirculation"
 
-
-  '/contract/nft/address/{address}/utxo':
+  "/contract/nft/address/{address}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract nft token utxos for specific address.
@@ -808,7 +800,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract nft utxo success.
           content:
             application/json:
@@ -816,13 +808,13 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/ContractNftUtxo'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  '/contract/nft/address/{address}/summary':
+                  $ref: "#/components/schemas/ContractNftUtxo"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  "/contract/nft/address/{address}/summary":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get nft summary(NFT count group by genesis) for address.
@@ -834,7 +826,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract nft utxo success.
           content:
             application/json:
@@ -842,13 +834,13 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/ContractNftAddressSummary'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  '/contract/nft/address/{address}/count/confirmed':
+                  $ref: "#/components/schemas/ContractNftAddressSummary"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  "/contract/nft/address/{address}/count/confirmed":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get confirmed utxo count for specific nft(ignore all unconfirmed txs).
@@ -872,18 +864,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract nft utxo success.
           content:
             application/json:
               schema:
                 type: integer
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  '/contract/nft/genesis/{codeHash}/{genesis}/utxo':
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  "/contract/nft/genesis/{codeHash}/{genesis}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract nft token utxos by codeHash and genesisId.
@@ -922,7 +914,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: Get contract nft utxo success.
           content:
             application/json:
@@ -930,13 +922,13 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/ContractNftUtxo'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  '/contract/nft/genesis/{codeHash}/{genesis}/summary':
+                  $ref: "#/components/schemas/ContractNftUtxo"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  "/contract/nft/genesis/{codeHash}/{genesis}/summary":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get nft summary(count group by address) for specific codeHash and genesisId(result cached for 60s).
@@ -954,7 +946,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract nft utxo success(result cached for 60s)..
           content:
             application/json:
@@ -962,14 +954,14 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/ContractNftGenesisSummary'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/ContractNftGenesisSummary"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
-  '/contract/nft/sell/address/{address}/utxo':
+  "/contract/nft/sell/address/{address}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract sell sell utxos for specific address.
@@ -1005,7 +997,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get contract nft sell utxo success.
           content:
             application/json:
@@ -1013,13 +1005,13 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/ContractNftSellUtxo'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  '/contract/nft/sell/genesis/{codeHash}/{genesis}/utxo':
+                  $ref: "#/components/schemas/ContractNftSellUtxo"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+  "/contract/nft/sell/genesis/{codeHash}/{genesis}/utxo":
     get:
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       tags:
         - contract
       summary: Get all contract nft token utxos by codeHash and genesisId.
@@ -1058,7 +1050,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: Get contract nft sell utxo success.
           content:
             application/json:
@@ -1066,9 +1058,9 @@ paths:
                 type: array
                 maxItems: 300
                 items:
-                  $ref: '#/components/schemas/ContractNftSellUtxo'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  $ref: "#/components/schemas/ContractNftSellUtxo"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 components:
   securitySchemes:
     # arbitrary name for the security scheme
@@ -1085,7 +1077,7 @@ components:
           schema:
             type: string
             items:
-              $ref: '#/components/schemas/ErrorResponse'
+              $ref: "#/components/schemas/ErrorResponse"
   schemas:
     ErrorResponse:
       description: Error response.
@@ -1166,7 +1158,6 @@ components:
           type: integer
           format: int64
           description: Size of the block
-
 
     BlockHeaderIndex:
       type: object
@@ -1325,15 +1316,15 @@ components:
       description: Parsed tx info
       properties:
         txDetail:
-          $ref: '#/components/schemas/BlockTx'
+          $ref: "#/components/schemas/BlockTx"
         inputs:
           type: array
           items:
-            $ref: '#/components/schemas/TxInput'
+            $ref: "#/components/schemas/TxInput"
         outputs:
           type: array
           items:
-            $ref: '#/components/schemas/TxOutput'
+            $ref: "#/components/schemas/TxOutput"
     TxInput:
       type: object
       description: Parsed inputs from raw tx. Use output api to get value and spent info.
@@ -1410,7 +1401,7 @@ components:
           description: Transactions that failed to be accepted by the mempool (if there are any)
           type: array
           items:
-            $ref: '#/components/schemas/InvalidBroadCast'
+            $ref: "#/components/schemas/InvalidBroadCast"
     InvalidBroadCast:
       type: object
       description: Invalid transactions detected during validation (if there are any)
@@ -1428,7 +1419,7 @@ components:
           description: return messages if broadcast failed
           type: array
           items:
-            $ref: '#/components/schemas/InvalidBroadcastCollide'
+            $ref: "#/components/schemas/InvalidBroadcastCollide"
 
     InvalidBroadcastCollide:
       type: object
@@ -1443,8 +1434,6 @@ components:
         hex:
           description: Whole transaction in hex
           type: string
-
-
 
     AsyncBroadcastResult:
       type: object
@@ -2293,3 +2282,4 @@ components:
         flag:
           description: Flag used for paging
           type: string
+
